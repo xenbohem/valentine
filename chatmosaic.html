@@ -361,19 +361,29 @@
             <p>Unveil the genesis of our inaugural venture: a clandestine algorithm born from the marriage of romance and technology. This project deciphers the language of hearts, translating whispers into eternal loops of devotion, where every glitch is a kiss in the machine.</p>
         </div>
         <div id="valentine" class="floor">
-            <img src="https://picsum.photos/400/300?random=5" alt="Eternal Love Network"> <!-- Replace with your .jpeg -->
-            <h2>Valentine Floor</h2>
-            <p>At the heart of the network lies the pinnacle of our cybergoth odyssey: a sanctuary for Valentine's eternal flame. Here, love transcends binaries, rebooting in infinite cycles. Join the conversation below to weave your threads into this tapestry of digital devotion.</p>
-            <!-- Threaded Chat Section -->
-            <div id="chat-section">
-                <form id="chat-form">
-                    <input type="text" id="chat-name" placeholder="Your Name" required>
-                    <textarea id="chat-message" placeholder="Your Message" rows="3" required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
-                <div id="chat-messages"></div>
-            </div>
-        </div>
+    <h2>Valentine Floor</h2>
+    <p>At the heart of the network lies the pinnacle of our cybergoth odyssey: a sanctuary for Valentine's eternal flame. Here, love transcends binaries, rebooting in infinite cycles. Join the conversation below to weave your threads into this tapestry of digital devotion.</p>
+    <!-- Horizontal Scrolling Image Gallery -->
+    <div id="image-gallery">
+        <img src="https://picsum.photos/200/150?random=5" alt="Valentine Image 1" class="gallery-img" data-full="https://picsum.photos/800/600?random=5"> <!-- Replace with your .jpeg -->
+        <img src="https://picsum.photos/200/150?random=6" alt="Valentine Image 2" class="gallery-img" data-full="https://picsum.photos/800/600?random=6"> <!-- Replace with your .jpeg -->
+        <img src="https://picsum.photos/200/150?random=7" alt="Valentine Image 3" class="gallery-img" data-full="https://picsum.photos/800/600?random=7"> <!-- Replace with your .jpeg -->
+    </div>
+    <!-- Modal for Expanded Image -->
+    <div id="image-modal" class="modal">
+        <span id="close-modal">&times;</span>
+        <img id="modal-img" src="" alt="Expanded Image">
+    </div>
+    <!-- Threaded Chat Section -->
+    <div id="chat-section">
+        <form id="chat-form">
+            <input type="text" id="chat-name" placeholder="Your Name" required>
+            <textarea id="chat-message" placeholder="Your Message" rows="3" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div id="chat-messages"></div>
+    </div>
+</div>
     </div>
 
     <script>
