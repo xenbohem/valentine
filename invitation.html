@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mysterious Invitation</title>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cinzel', serif; /* Gothic font */
+            background: linear-gradient(135deg, #1a1a1a, #4a0e0e); /* Dark gothic gradient */
+            color: #f0f0f0;
+            overflow-x: hidden;
+            transition: all 1s ease;
+        }
+
+        /* Initial Invitation Page */
+        #invitation {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://via.placeholder.com/1920x1080/000000/ffffff?text=Gothic+Background') no-repeat center center/cover; /* Replace with your gothic image */
+            text-align: center;
+            position: relative;
+        }
+
+        #invitation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 0, 0, 0.1); /* Soft red overlay */
+            filter: blur(5px); /* Gaussian blur */
+            z-index: -1;
+        }
+
+        #invitation h1 {
+            font-size: 3rem;
+            color: #ff0000; /* Blood red */
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        #invitation p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        #yes-button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background: #8b0000; /* Dark red */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #yes-button:hover {
+            background: #ff0000;
+        }
+
+        /* Loading Page */
+        #loading {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #000;
+            color: #ff0000;
+            text-align: center;
+        }
+
+        #loading h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        #progress-bar {
+            width: 300px;
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        #progress-fill {
+            height: 100%;
+            background: #ff0000;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        #loading-text {
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: reveal 2s infinite;
+        }
+
+        @keyframes reveal {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Main Elevator Page */
+        #elevator {
+            display: none;
+            height: 100vh;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            position: relative;
+        }
+
+        #elevator::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* See-through overlay */
+            filter: blur(3px); /* Soft blur */
+            z-index: -1;
+        }
+
+        .floor {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: url('https://via.placeholder.com/1920x1080/1a1a1a/ff0000?text=Vampiric+Texture') no-repeat center center/cover; /* Gothic texture */
+            border-bottom: 2px solid #ff0000;
+        }
+
+        .floor h2 {
+            font-size: 2.5rem;
+            color: #ff0000;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .floor p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        /* Floating Nav Menu */
+        #nav {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .nav-button {
+            padding: 10px 15px;
+            background: rgba(139, 0, 0, 0.8); /* Semi-transparent red */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+
+        /* Hide elements initially */
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <!-- Initial Invitation Page -->
+    <div id="invitation">
+        <h1>🦇 Mysterious Invitation 🦇</h1>
+        <p>An elaborate summons awaits those brave enough to enter the shadows of romance.</p>
+        <p>Are You Willing?</p>
+        <button id="yes-button">YES</button>
+    </div>
+
+    <!-- Loading Page -->
+    <div id="loading">
+        <h2>Preparing the Shadows...</h2>
+        <div id="progress-bar">
+            <div id="progress-fill"></div>
+        </div>
+        <p id="loading-text">Whispers of the night awaken...</p>
+    </div>
+
+    <!-- Main Elevator Page -->
+    <div id="elevator">
+        <!-- Floating Nav Menu -->
+        <div id="nav">
+            <button class="nav-button" data-floor="greeting">Greeting</button>
+            <button class="nav-button" data-floor="about">About</button>
+            <button class="nav-button" data-floor="we-are">We Are</button>
+            <button class="nav-button" data-floor="project1">Project 1</button>
+            <button class="nav-button" data-floor="valentine">Valentine</button>
+        </div>
+
+        <!-- Floors -->
+        <div id="greeting" class="floor">
+            <h2>Greeting Floor</h2>
+            <p>Welcome to the depths of eternal love. Feel the chill of the night as hearts intertwine in gothic embrace.</p>
+        </div>
+        <div id="about" class="floor">
+            <h2>About Floor</h2>
+            <p>This is a realm of mystery and passion, where vampires whisper sweet nothings under the Valentine's moon.</p>
+        </div>
+        <div id="we-are" class="floor">
+            <h2>We Are Floor</h2>
+            <p>We are the shadows that dance in the candlelight, the lovers who defy the dawn.</p>
+        </div>
+        <div id="project1" class="floor">
+            <h2>Project 1 Floor</h2>
+            <p>A secret project unfolds: a symphony of blood-red roses and eternal vows.</p>
+        </div>
+        <div id="valentine" class="floor">
+            <h2>Valentine Floor</h2>
+            <p>Here, at the heart of darkness, love blooms forever. Happy Valentine's, my eternal one. 💋</p>
+        </div>
+    </div>
+
+    <script>
+        // Elements
+        const invitation = document.getElementById('invitation');
+        const loading = document.getElementById('loading');
+        const elevator = document.getElementById('elevator');
+        const yesButton = document.getElementById('yes-button');
+        const progressFill = document.getElementById('progress-fill');
+        const navButtons = document.querySelectorAll('.nav-button');
+
+        // Event: YES Button Click
+        yesButton.addEventListener('click', () => {
+            invitation.style.display = 'none';
+            loading.style.display = 'flex';
+
+            // Simulate loading progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                progressFill.style.width = progress + '%';
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    // Transition to elevator
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                        elevator.style.display = 'block';
+                        // Smooth reveal
+                        elevator.style.opacity = '0';
+                        setTimeout(() => {
+                            elevator.style.opacity = '1';
+                        }, 100);
+                    }, 1000);
+                }
+            }, 200);
+        });
+
+        // Event: Nav Button Clicks (Elevator Navigation)
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const floorId = button.getAttribute('data-floor');
+                const floorElement = document.getElementById(floorId);
+                floorElement.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
