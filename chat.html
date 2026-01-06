@@ -208,6 +208,11 @@
             text-shadow: 0 0 10px rgba(233, 30, 99, 0.5);
             margin-bottom: 20px;
         }
+        /* Add this to enable scrolling on the Valentine floor */
+    #valentine {
+    overflow-y: auto; /* Allows vertical scrolling if content exceeds height */
+    min-height: 100vh; /* Ensures it starts at full height but can grow */
+}
 
         /* Chat Section for Valentine Floor */
         #chat-section {
