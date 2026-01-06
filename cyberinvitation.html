@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybergoth Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"> <!-- Cyberpunk font -->
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif; /* Futuristic cyber font */
+            background: linear-gradient(135deg, #1a0033, #4a148c, #6a1b9a, #9c27b0, #ba68c8); /* Indigo to purple ombre */
+            color: #e1bee7; /* Light violet */
+            overflow-x: hidden;
+            transition: all 1s ease;
+        }
+
+        /* Initial Invitation Page */
+        #invitation {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://via.placeholder.com/1920x1080/1a0033/e1bee7?text=Neon+City+Background') no-repeat center center/cover; /* Cyberpunk neon city image */
+            text-align: center;
+            position: relative;
+        }
+
+        #invitation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(138, 43, 226, 0.3), rgba(75, 0, 130, 0.5)); /* Violet-indigo ombre overlay */
+            filter: blur(8px); /* Soft Gaussian blur */
+            z-index: -1;
+        }
+
+        #invitation h1 {
+            font-size: 3rem;
+            color: #ba68c8; /* Violet */
+            text-shadow: 0 0 20px rgba(186, 104, 200, 0.8), 0 0 40px rgba(186, 104, 200, 0.5); /* Neon glow */
+            margin-bottom: 20px;
+        }
+
+        #invitation p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+        }
+
+        #yes-button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #4a148c, #6a1b9a); /* Indigo to purple gradient */
+            color: #e1bee7;
+            border: 2px solid #ba68c8;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(186, 104, 200, 0.8); /* Neon glow */
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        #yes-button:hover {
+            box-shadow: 0 0 30px rgba(186, 104, 200, 1);
+            transform: scale(1.05);
+        }
+
+        /* Loading Page */
+        #loading {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #2d1b69, #512da8); /* Dark indigo gradient */
+            color: #ba68c8;
+            text-align: center;
+        }
+
+        #loading h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(186, 104, 200, 0.7);
+        }
+
+        #progress-bar {
+            width: 300px;
+            height: 10px;
+            background: #424242; /* Grey */
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6a1b9a, #ba68c8); /* Purple gradient */
+            width: 0%;
+            transition: width 0.1s;
+            box-shadow: 0 0 10px rgba(186, 104, 200, 0.8);
+        }
+
+        #loading-text {
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: reveal 2s infinite;
+            text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+        }
+
+        @keyframes reveal {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Main Elevator Page */
+        #elevator {
+            display: none;
+            height: 100vh;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            position: relative;
+        }
+
+        #elevator::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(26, 0, 51, 0.6), rgba(106, 27, 154, 0.4), rgba(186, 104, 200, 0.2)); /* Indigo-purple-grey ombre overlay */
+            filter: blur(5px); /* Soft blur */
+            z-index: -1;
+        }
+
+        .floor {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: url('https://via.placeholder.com/1920x1080/2d1b69/ba68c8?text=Cyber+Texture') no-repeat center center/cover; /* Cyber circuit texture */
+            border-bottom: 2px solid #ba68c8;
+            position: relative;
+        }
+
+        .floor::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(138, 43, 226, 0.1); /* Subtle violet see-through layer */
+            filter: blur(3px);
+            z-index: -1;
+        }
+
+        .floor h2 {
+            font-size: 2.5rem;
+            color: #ba68c8;
+            text-shadow: 0 0 20px rgba(186, 104, 200, 0.8), 0 0 40px rgba(186, 104, 200, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .floor p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            text-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+        }
+
+        /* Floating Nav Menu */
+        #nav {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .nav-button {
+            padding: 10px 15px;
+            background: linear-gradient(45deg, #4a148c, #6a1b9a); /* Indigo-purple gradient */
+            color: #e1bee7;
+            border: 1px solid #ba68c8;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            box-shadow: 0 0 15px rgba(186, 104, 200, 0.6);
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .nav-button:hover {
+            box-shadow: 0 0 25px rgba(186, 104, 200, 0.9);
+            transform: scale(1.1);
+        }
+
+        /* Hide elements initially */
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <!-- Initial Invitation Page -->
+    <div id="invitation">
+        <h1>🔮 Cybergoth Invitation 🔮</h1>
+        <p>An elaborate digital summons pulses through the neural networks of desire.</p>
+        <p>Are You Willing?</p>
+        <button id="yes-button">YES</button>
+    </div>
+
+    <!-- Loading Page -->
+    <div id="loading">
+        <h2>Initializing Neural Pathways...</h2>
+        <div id="progress-bar">
+            <div id="progress-fill"></div>
+        </div>
+        <p id="loading-text">Digital echoes awaken...</p>
+    </div>
+
+    <!-- Main Elevator Page -->
+    <div id="elevator">
+        <!-- Floating Nav Menu -->
+        <div id="nav">
+            <button class="nav-button" data-floor="greeting">Greeting</button>
+            <button class="nav-button" data-floor="about">About</button>
+            <button class="nav-button" data-floor="we-are">We Are</button>
+            <button class="nav-button" data-floor="project1">Project 1</button>
+            <button class="nav-button" data-floor="valentine">Valentine</button>
+        </div>
+
+        <!-- Floors -->
+        <div id="greeting" class="floor">
+            <h2>Greeting Floor</h2>
+            <p>Welcome to the cyber abyss of eternal connection. Feel the hum of circuits as hearts sync in violet glow.</p>
+        </div>
+        <div id="about" class="floor">
+            <h2>About Floor</h2>
+            <p>This is a realm of code and passion, where digital lovers defy the void under a holographic Valentine's sky.</p>
+        </div>
+        <div id="we-are" class="floor">
+            <h2>We Are Floor</h2>
+            <p>We are the glitches in the matrix, the avatars who transcend the screen.</p>
+        </div>
+        <div id="project1" class="floor">
+            <h2>Project 1 Floor</h2>
+            <p>A secret algorithm unfolds: a symphony of neon roses and infinite loops of devotion.</p>
+        </div>
+        <div id="valentine" class="floor">
+            <h2>Valentine Floor</h2>
+            <p>Here, at the core of the network, love reboots forever. Happy Valentine's, my digital soulmate. 💜</p>
+        </div>
+    </div>
+
+    <script>
+        // Elements
+        const invitation = document.getElementById('invitation');
+        const loading = document.getElementById('loading');
+        const elevator = document.getElementById('elevator');
+        const yesButton = document.getElementById('yes-button');
+        const progressFill = document.getElementById('progress-fill');
+        const navButtons = document.querySelectorAll('.nav-button');
+
+        // Event: YES Button Click
+        yesButton.addEventListener('click', () => {
+            invitation.style.display = 'none';
+            loading.style.display = 'flex';
+
+            // Simulate loading progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                progressFill.style.width = progress + '%';
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    // Transition to elevator
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                        elevator.style.display = 'block';
+                        // Smooth reveal
+                        elevator.style.opacity = '0';
+                        setTimeout(() => {
+                            elevator.style.opacity = '1';
+                        }, 100);
+                    }, 1000);
+                }
+            }, 200);
+        });
+
+        // Event: Nav Button Clicks (Elevator Navigation)
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const floorId = button.getAttribute('data-floor');
+                const floorElement = document.getElementById(floorId);
+                floorElement.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
